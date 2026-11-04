@@ -38,7 +38,7 @@ jobs:
           persist-credentials: false
       - run: |
           docker run --rm -it \
-            -v $(PWD):/config \
+            -v $(pwd):/config \
             --entrypoint bash \
             --env MISE_CONFIG_DIR=/config \
             "${{ matrix.image }}" \
