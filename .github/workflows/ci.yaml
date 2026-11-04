@@ -50,18 +50,14 @@ jobs:
     timeout-minutes: 2
     permissions:
       contents: read
+    env:
+      MISE_CONFIG_DIR: ${{ github.workspace }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - run: |
-          docker run --rm -it \
-            -v $(PWD):/config \
-            --entrypoint bash \
-            --env MISE_CONFIG_DIR=/config \
-            fedora:44 \
-            -c 'curl -fsSL https://mise.run | sh && "$HOME/.local/bin/mise" bootstrap --yes'
+      - run: curl -fsSL https://mise.run | sh && "$HOME/.local/bin/mise" bootstrap --yes
 
   workflow-lint:
     if: >-
@@ -84,9 +80,8 @@ jobs:
     if: ${{ !cancelled() }}
     name: Build Success
     needs:
-      - rust-build
-      - rust-test
-      - rust-lint
+      - bootstrap-test-container
+      - bootstrap-test-macos
       - workflow-lint
     runs-on: ubuntu-26.04
     timeout-minutes: 10
