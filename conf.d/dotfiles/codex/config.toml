@@ -1,3 +1,8 @@
+web_search = "live"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+
 [analytics]
 enabled = false
 
@@ -10,4 +15,15 @@ log_user_prompt = false
 # workspace-write only allows the workspace and /tmp, so without this Go builds
 # fall back to per-session caches in /tmp, which fill its quota on Fedora.
 [sandbox_workspace_write]
-writable_roots = ["{{ env.HOME }}/{% if os() == "macos" %}Library/Caches{% else %}.cache{% endif %}/go-build"]
+writable_roots = [
+  "{{ env.HOME }}/{% if os() == "macos" %}Library/Caches{% else %}.cache{% endif %}/go-build",
+  "{{ env.HOME }}/{% if os() == "macos" %}Library/Caches{% else %}.cache{% endif %}/mise",
+]
+network_access = true
+
+[features.network_proxy]
+enabled = true
+domains = {
+  "api.github.com" = "allow",
+  "github.com" = "allow",
+}
