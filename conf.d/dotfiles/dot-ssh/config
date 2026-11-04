@@ -1,0 +1,24 @@
+Include {{ xdg_config_home }}/colima/ssh_config
+Include {{ env.HOME }}/.ssh/conf.d/*
+
+Host *
+  SetEnv TERM="xterm-256color"
+  {% if os() == "macos" -%}
+  IdentityAgent "{{ env.HOME }}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  {% elif os() == "linux" -%}
+  IdentityAgent "{{ env.HOME }}/.1password/agent.sock"
+  {%- endif %}
+
+Host *
+  ForwardAgent yes
+  AddKeysToAgent no
+  Compression yes
+  ServerAliveInterval 0
+  ServerAliveCountMax 3
+  HashKnownHosts no
+  UserKnownHostsFile ~/.ssh/known_hosts
+  {%- if os() != "windows" %}
+  ControlMaster auto
+  ControlPath /tmp/ssh.%r.%n.%p
+  ControlPersist 10m
+  {%- endif -%}

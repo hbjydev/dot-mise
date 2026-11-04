@@ -1,0 +1,26 @@
+[bootstrap.brew]
+adopt = true
+
+[bootstrap.packages]
+"brew:findutils" = "latest"
+"brew:git" = "latest"
+"brew:gnu-getopt" = "latest"
+"brew:sequoia-sq" = "latest"
+"brew:tree-sitter" = "latest"
+"brew:tree-sitter-cli" = "latest"
+
+# macos-only
+"brew-cask:1password" = "latest"
+"brew-cask:1password-cli" = "latest"
+"brew-cask:discord" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:keymapp" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+
+[bootstrap.services.colima]
+scope = "user"
+command = "colima start -f"
+restart = "on-failure"
+enabled = true

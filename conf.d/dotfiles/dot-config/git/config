@@ -1,0 +1,83 @@
+# vim:ft=gitconfig
+
+[init]
+  defaultBranch = "main"
+
+[diff]
+  external = "{{ xdg_data_home }}/mise/shims/difft"
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+  default = "simple"
+
+[rebase]
+  autoStash = true
+
+[alias]
+  a = "add"
+  b = "branch"
+  ch = "checkout"
+  ci = "commit"
+  cm = "commit -m"
+  d = "diff"
+  ds = "diff --staged"
+  l = "log --pretty=oneline --abbrev-commit"
+  p = "pull"
+  pp = "push"
+  s = "status -s"
+  wt = "worktree"
+
+[commit]
+  gpgsign = true
+  verbose = false
+
+[core]
+  pager = "delta"
+
+[gpg]
+  format = "ssh"
+
+[gpg "ssh"]
+  {% if os() == "macos" -%}
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+  {% elif os() == "windows" -%}
+  program = "{{ env.USERPROFILE }}/AppData/Local/Programs/1Password/op-ssh-sign.exe"
+  {% elif os() == "linux" -%}
+  program = "/opt/1Password/op-ssh-sign"
+  {%- endif %}
+
+[user]
+  name = "Hayden Young"
+  email = "hayden@hayden.moe"
+  signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDkhuhfzyg7R+O62XSktHufGmmhy6FNDi/NuPPJt7bI+"
+
+# credential helpers
+[credential "https://gist.github.com"]
+  helper =
+  helper = "!{{ xdg_data_home }}/mise/shims/gh auth git-credential"
+
+[credential "https://github.com"]
+  helper =
+  helper = "!{{ xdg_data_home }}/mise/shims/gh auth git-credential"
+
+[credential "https://git.hayden.moe"]
+  helper =
+  helper = "!{{ xdg_data_home }}/mise/shims/fjo auth git-credential"
+
+[credential "https://git.ow-ops.eu"]
+  helper =
+  helper = "!{{ xdg_data_home }}/mise/shims/fjo auth git-credential"
+
+[credential "https://git.sable.moe"]
+  helper =
+  helper = "!{{ xdg_data_home }}/mise/shims/fjo auth git-credential"
+
+[includeIf "gitdir:~/Development/repos/github.com/bitshift-systems/**"]
+  path = "{{ xdg_config_home }}/git/orgs/bitshift-systems.inc"
+[includeIf "gitdir:~/Development/repos/github.com/acquiredcom/**"]
+  path = "{{ xdg_config_home }}/git/orgs/acquired.inc"
+[includeIf "gitdir:~/Development/repos/github.com/acquired-pci/**"]
+  path = "{{ xdg_config_home }}/git/orgs/acquired.inc"

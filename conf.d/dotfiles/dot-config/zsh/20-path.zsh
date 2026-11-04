@@ -1,0 +1,26 @@
+export PATH="{{ system_brew_prefix }}/bin:$PATH:$HOME/.local/bin"
+
+eval "$(mise activate zsh)"  
+eval "$(starship init zsh)"
+
+if [[ -d "$HOME/.bun" ]]; then
+  export PATH="$PATH:$HOME/.bun/bin"
+fi
+
+if [[ -d "$HOME/.dotnet/tools" ]]; then
+  export PATH="$PATH:$HOME/.dotnet/tools"
+fi
+
+if [[ -d "$HOME/.cache/.bun" ]]; then
+  export PATH="$PATH:$HOME/.cache/.bun/bin"
+fi
+
+if [[ -d "$HOME/.lmstudio/bin" ]]; then
+  export PATH="$PATH:$HOME/.lmstudio/bin"
+fi
+
+if [[ -d "$HOME/.krew/bin" ]]; then
+  export PATH="$PATH:$HOME/.krew/bin"
+fi
+
+# vim:ft=zsh

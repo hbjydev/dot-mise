@@ -1,0 +1,8 @@
+# Include configs from $XDG_CONFIG_HOME/zsh
+for file in $HOME/.config/zsh/*.zsh; do
+  if [ -f "$file" ]; then
+    source "$file"
+  fi
+done
+
+# vim:ft=zsh

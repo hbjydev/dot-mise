@@ -1,0 +1,10 @@
+[settings]
+experimental = true
+verbose = false
+jobs = 4
+raw = false
+pipx.uvx = true
+python.uv_venv_auto = true
+auto_env = true
+
+# vim:ft=toml

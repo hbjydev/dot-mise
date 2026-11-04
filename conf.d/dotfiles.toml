@@ -1,0 +1,43 @@
+[bootstrap.repos]
+"~/.config/nvim" = { "url" = "https://github.com/hbjydev/neovim.git" }
+"~/.config/zsh/plugins/zsh-syntax-highlighting" = { "url" = "https://github.com/zsh-users/zsh-syntax-highlighting.git", depth = 1 }
+"~/.config/zsh/plugins/zsh-autosuggestions" = { "url" = "https://github.com/zsh-users/zsh-autosuggestions.git", depth = 1 }
+
+[dotfiles]
+# Misc tool config
+"~/.config/git/config" = { source = "dotfiles/dot-config/git/config", mode = "template" }
+"~/.config/git/orgs/*.inc" = { source = "dotfiles/dot-config/git/orgs/*.inc", mode = "template" }
+"~/.config/gh/*" = { source = "dotfiles/dot-config/gh/*", mode = "copy" }
+"~/.config/ghostty/*" = { source = "dotfiles/dot-config/ghostty/*", mode = "copy" }
+
+# Shell Configuration
+"~/.zshrc" = { source = "dotfiles/dot-zshrc", mode = "copy" }
+"~/.config/zsh/*.zsh" = { source = "dotfiles/dot-config/zsh/*.zsh", mode = "template" }
+
+# SSH config
+"~/.ssh/*" = { source = "dotfiles/dot-ssh/*", mode = "template", permissions = "0600" }
+
+[bootstrap.macos.dock]
+tilesize = 46
+show_recents = false
+
+[bootstrap.macos.finder]
+show_all_files = true
+show_extensions_warning = false
+show_pathbar = true
+sort_folders_first = true
+
+[bootstrap.macos.defaults."com.apple.finder"]
+AppleShowAllExtensions = true
+
+[bootstrap.macos.defaults."com.apple.ActivityMonitor"]
+UpdatePeriod = 2
+
+[bootstrap.macos.defaults."com.apple.screencapture"]
+location = "~/Pictures"
+
+[bootstrap.macos.defaults."NSGlobalDomain"]
+AppleInterfaceStyle = "Dark"
+AppleShowAllExtensions = true
+AppleKeyboardUIMode = 2
+NSDocumentSaveNewDocumentsToCloud = false
