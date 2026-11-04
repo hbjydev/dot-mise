@@ -1,0 +1,103 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+      - ".release-please-manifest.json"
+  pull_request:
+    branches:
+      - main
+  merge_group:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bootstrap-test-container:
+    name: Bootstrap Test (Linux containers)
+    runs-on: ubuntu-26.04
+    strategy:
+      matrix:
+        image: [fedora:44, rockylinux/rockylinux:10]
+    timeout-minutes: 2
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: |
+          docker run --rm -it \
+            -v $(PWD):/config \
+            --entrypoint bash \
+            --env MISE_CONFIG_DIR=/config \
+            "${{ matrix.image }}" \
+            -c 'curl -fsSL https://mise.run | sh && "$HOME/.local/bin/mise" bootstrap --yes'
+
+  bootstrap-test-macos:
+    name: Bootstrap Test (macOS)
+    runs-on: macos-27
+    timeout-minutes: 2
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: |
+          docker run --rm -it \
+            -v $(PWD):/config \
+            --entrypoint bash \
+            --env MISE_CONFIG_DIR=/config \
+            fedora:44 \
+            -c 'curl -fsSL https://mise.run | sh && "$HOME/.local/bin/mise" bootstrap --yes'
+
+  workflow-lint:
+    if: >-
+      ${{ !(startsWith(github.head_ref, 'release-please--')
+      && github.event.pull_request.head.repo.full_name == github.repository) }}
+    name: Workflow Lint
+    runs-on: ubuntu-26.04
+    timeout-minutes: 2
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Lint workflows
+        uses: bitshift-systems/.github/actions/workflow-lint@a873c98baeea43f21c2de91bdeb6cd24e13022e3 # workflow-lint-v2.0.0
+
+  status:
+    if: ${{ !cancelled() }}
+    name: Build Success
+    needs:
+      - rust-build
+      - rust-test
+      - rust-lint
+      - workflow-lint
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    permissions: {}
+    steps:
+      - name: Any jobs failed?
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: |
+          exit 1
+
+      - name: All jobs passed or skipped?
+        if: ${{ !(contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
+        run: |
+          echo "All jobs passed or skipped" && echo "${{ toJSON(needs.*.result) }}"

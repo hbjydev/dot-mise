@@ -4,6 +4,8 @@ adopt = true
 [bootstrap.packages]
 # Fedora/RHEL
 "dnf:zsh" = "latest"
+"dnf:libatomic" = "latest"
+"dnf:@development-tools" = "latest"
 
 "brew:findutils" = "latest"
 "brew:git" = "latest"
