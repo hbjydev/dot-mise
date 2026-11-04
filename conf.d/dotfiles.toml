@@ -6,7 +6,8 @@
 [dotfiles]
 # Misc tool config
 "~/.config" = { source = "dotfiles/config", mode = "copy", exclude = ["*.tmpl"] }
-"~/.config/git/config" = { source = "dotfiles/config/git/config.tmpl", mode = "template" }
+"~/.config/**/*" = { source = "dotfiles/config/**/*.tmpl", mode = "template" }
+"~/.local/bin/*" = { source = "dotfiles/local/bin/*", mode = "copy", permissions = "744" }
 
 # Agentic tool config
 "~/.codex/AGENTS.md" = { source = "dotfiles/AGENTS.md", mode = "copy" }
