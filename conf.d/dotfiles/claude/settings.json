@@ -1,0 +1,9 @@
+{
+  "agentPushNotifEnabled": true,
+  "theme": "dark",
+  "tui": "fullscreen",
+  "sandbox": {
+    "enabled": true,
+    "enableWeakerNetworkIsolation": true
+  }
+}

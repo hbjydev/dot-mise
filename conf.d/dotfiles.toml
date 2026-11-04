@@ -5,17 +5,24 @@
 
 [dotfiles]
 # Misc tool config
-"~/.config/git/config" = { source = "dotfiles/dot-config/git/config", mode = "template" }
-"~/.config/git/orgs/*.inc" = { source = "dotfiles/dot-config/git/orgs/*.inc", mode = "template" }
-"~/.config/gh/*" = { source = "dotfiles/dot-config/gh/*", mode = "copy" }
-"~/.config/ghostty/*" = { source = "dotfiles/dot-config/ghostty/*", mode = "copy" }
+"~/.config/git/config" = { source = "dotfiles/config/git/config", mode = "template" }
+"~/.config/git/orgs/*.inc" = { source = "dotfiles/config/git/orgs/*.inc", mode = "template" }
+"~/.config/gh/*" = { source = "dotfiles/config/gh/*", mode = "copy" }
+"~/.config/ghostty/*" = { source = "dotfiles/config/ghostty/*", mode = "copy" }
+
+# Agentic tool config
+"~/.codex/AGENTS.md" = { source = "dotfiles/AGENTS.md", mode = "copy" }
+"~/.codex/config.toml/shared" = { source = "dotfiles/codex/config.toml", merge = true, template = "tera" }
+
+"~/.claude/CLAUDE.md" = { source = "dotfiles/AGENTS.md", mode = "copy" }
+"~/.claude/settings.json/shared" = { source = "dotfiles/claude/settings.json", merge = true, template = "tera" }
 
 # Shell Configuration
-"~/.zshrc" = { source = "dotfiles/dot-zshrc", mode = "copy" }
-"~/.config/zsh/*.zsh" = { source = "dotfiles/dot-config/zsh/*.zsh", mode = "template" }
+"~/.zshrc" = { source = "dotfiles/zshrc", mode = "copy" }
+"~/.config/zsh/*.zsh" = { source = "dotfiles/config/zsh/*.zsh", mode = "template" }
 
 # SSH config
-"~/.ssh/*" = { source = "dotfiles/dot-ssh/*", mode = "template", permissions = "0600" }
+"~/.ssh/*" = { source = "dotfiles/ssh/*", mode = "template", permissions = "0600" }
 
 [bootstrap.macos.dock]
 tilesize = 46
