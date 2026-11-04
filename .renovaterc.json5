@@ -4,4 +4,17 @@
   mise: {
     managerFilePatterns: ["config.toml", "conf.d/*.toml"],
   },
+
+  packageRules: [
+    {
+      description: [
+        "Mise tools group: the catch-all for mise-managed dev tooling (linters, formatters, CLIs).",
+        "Keep it above the toolchain rules, so that their groupName wins for go, rust and node. A later rule overrides an earlier one.",
+        "Same minimumReleaseAge as the GitHub Actions group. A fresh release often uploads its per-arch assets and attestations after the tag appears. A lock taken too early leaves mise.lock without platform URLs."
+      ],
+      matchManagers: ["mise"],
+      groupName: "mise tools",
+      groupSlug: "mise-tools"
+    },
+  ],
 }
