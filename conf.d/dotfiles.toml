@@ -5,10 +5,8 @@
 
 [dotfiles]
 # Misc tool config
-"~/.config/git/config" = { source = "dotfiles/config/git/config", mode = "template" }
-"~/.config/git/orgs/*.inc" = { source = "dotfiles/config/git/orgs/*.inc", mode = "template" }
-"~/.config/gh/*" = { source = "dotfiles/config/gh/*", mode = "copy" }
-"~/.config/ghostty/*" = { source = "dotfiles/config/ghostty/*", mode = "copy" }
+"~/.config" = { source = "dotfiles/config", mode = "copy", exclude = ["*.tmpl"] }
+"~/.config/git/config" = { source = "dotfiles/config/git/config.tmpl", mode = "template" }
 
 # Agentic tool config
 "~/.codex/AGENTS.md" = { source = "dotfiles/AGENTS.md", mode = "copy" }
@@ -19,7 +17,6 @@
 
 # Shell Configuration
 "~/.zshrc" = { source = "dotfiles/zshrc", mode = "copy" }
-"~/.config/zsh/*.zsh" = { source = "dotfiles/config/zsh/*.zsh", mode = "template" }
 
 # SSH config
 "~/.ssh/*" = { source = "dotfiles/ssh/*", mode = "template", permissions = "0600" }

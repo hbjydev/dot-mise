@@ -1,0 +1,15 @@
+*~
+.DS_Store
+.env
+.direnv
+.venv
+.mise.local.toml
+
+# Neovim configuration files
+.nvim/
+.nvim.lua
+
+# AI project-specific files
+**/.claude/worktrees
+**/.claude/settings.local.json
+**/.claude/.cc-writes/

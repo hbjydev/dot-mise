@@ -35,6 +35,8 @@
   verbose = false
 
 [core]
+  autocrlf = input
+  editor = "nvim"
   pager = "delta"
 
 [gpg]
@@ -75,9 +77,9 @@
   helper =
   helper = "!{{ xdg_data_home }}/mise/shims/fjo auth git-credential"
 
-[includeIf "gitdir:~/Development/repos/github.com/bitshift-systems/**"]
+[includeIf "gitdir:{{ env.HOME }}/Development/repos/github.com/bitshift-systems/**"]
   path = "{{ xdg_config_home }}/git/orgs/bitshift-systems.inc"
-[includeIf "gitdir:~/Development/repos/github.com/acquiredcom/**"]
+[includeIf "gitdir:{{ env.HOME }}/Development/repos/github.com/acquiredcom/**"]
   path = "{{ xdg_config_home }}/git/orgs/acquired.inc"
-[includeIf "gitdir:~/Development/repos/github.com/acquired-pci/**"]
+[includeIf "gitdir:{{ env.HOME }}/Development/repos/github.com/acquired-pci/**"]
   path = "{{ xdg_config_home }}/git/orgs/acquired.inc"
