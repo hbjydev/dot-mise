@@ -26,6 +26,7 @@ jobs:
     name: Bootstrap Test (Linux containers)
     runs-on: ubuntu-26.04
     strategy:
+      fail-fast: false
       matrix:
         image: [fedora:44, rockylinux/rockylinux:10]
     timeout-minutes: 2
@@ -73,6 +74,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - run: |
+          {
+            echo "[tools]"
+            echo 'jactionlint = "latest"'
+            echo 'shellcheck = "latest"'
+          } >> ".mise.toml"
       - name: Lint workflows
         uses: bitshift-systems/.github/actions/workflow-lint@a873c98baeea43f21c2de91bdeb6cd24e13022e3 # workflow-lint-v2.0.0
 
