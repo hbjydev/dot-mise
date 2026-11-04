@@ -37,7 +37,7 @@ jobs:
         with:
           persist-credentials: false
       - run: |
-          docker run --rm -it \
+          docker run --rm \
             -v $(pwd):/config \
             --entrypoint bash \
             --env MISE_CONFIG_DIR=/config \
