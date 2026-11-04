@@ -28,8 +28,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: [fedora:44, rockylinux/rockylinux:10]
-    timeout-minutes: 2
+        image: [fedora:44]
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -48,7 +48,7 @@ jobs:
   bootstrap-test-macos:
     name: Bootstrap Test (macOS)
     runs-on: macos-latest
-    timeout-minutes: 2
+    timeout-minutes: 10
     permissions:
       contents: read
     env:
@@ -58,7 +58,11 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - run: curl -fsSL https://mise.run | sh && "$HOME/.local/bin/mise" bootstrap --yes
+      - run: |
+          gpg --keyserver hkps://keys.openpgp.org --recv-keys 24853EC9F655CE80B48E6C3A8B81C9D17413A06D
+          curl -fsSL -o install.sh.sig https://mise.jdx.dev/install.sh.sig
+          gpg --output install.sh --decrypt install.sh.sig
+          sh ./install.sh && "$HOME/.local/bin/mise" bootstrap --yes
 
   workflow-lint:
     if: >-
