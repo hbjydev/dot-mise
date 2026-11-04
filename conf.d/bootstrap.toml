@@ -2,6 +2,9 @@
 adopt = true
 
 [bootstrap.packages]
+# Fedora/RHEL
+"dnf:zsh" = "latest"
+
 "brew:findutils" = "latest"
 "brew:git" = "latest"
 "brew:gnu-getopt" = "latest"
@@ -9,15 +12,15 @@ adopt = true
 "brew:tree-sitter" = "latest"
 "brew:tree-sitter-cli" = "latest"
 
-# macos-only
-"brew-cask:1password" = "latest"
-"brew-cask:1password-cli" = "latest"
-"brew-cask:discord" = "latest"
-"brew-cask:ghostty" = "latest"
-"brew-cask:keymapp" = "latest"
-"brew-cask:raycast" = "latest"
-"brew-cask:spotify" = "latest"
-"brew-cask:visual-studio-code" = "latest"
+# MacOS
+"brew-cask:1password" = { os = "macos" }
+"brew-cask:1password-cli" = { os = "macos" }
+"brew-cask:discord" = { os = "macos" }
+"brew-cask:ghostty" = { os = "macos" }
+"brew-cask:keymapp" = { os = "macos" }
+"brew-cask:raycast" = { os = "macos" }
+"brew-cask:spotify" = { os = "macos" }
+"brew-cask:visual-studio-code" = { os = "macos" }
 
 [bootstrap.services.colima]
 scope = "user"
