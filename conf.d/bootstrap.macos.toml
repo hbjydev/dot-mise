@@ -1,0 +1,16 @@
+[bootstrap.packages]
+# MacOS
+"brew-cask:1password" = "latest"
+"brew-cask:1password-cli" = "latest"
+"brew-cask:discord" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:keymapp" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+
+[bootstrap.services.colima]
+scope = "user"
+command = "colima start -f"
+restart = "on-failure"
+enabled = true

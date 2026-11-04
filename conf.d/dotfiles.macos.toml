@@ -1,0 +1,24 @@
+[bootstrap.macos.dock]
+tilesize = 46
+show_recents = false
+
+[bootstrap.macos.finder]
+show_all_files = true
+show_extensions_warning = false
+show_pathbar = true
+sort_folders_first = true
+
+[bootstrap.macos.defaults."com.apple.finder"]
+AppleShowAllExtensions = true
+
+[bootstrap.macos.defaults."com.apple.ActivityMonitor"]
+UpdatePeriod = 2
+
+[bootstrap.macos.defaults."com.apple.screencapture"]
+location = "~/Pictures"
+
+[bootstrap.macos.defaults."NSGlobalDomain"]
+AppleInterfaceStyle = "Dark"
+AppleShowAllExtensions = true
+AppleKeyboardUIMode = 2
+NSDocumentSaveNewDocumentsToCloud = false
